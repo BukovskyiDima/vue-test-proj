@@ -1,25 +1,39 @@
 <template>
-	<button @click="onChange"
-	>
-		{{ add }}
-	</button>
+	<div>
+		<button @click=" $emit('addList');
+						 $emit('getFavoriteFilms');
+						 onChange();"
+		>
+			{{ name }}
+		</button>
+	</div>
 </template>
 
 <script>
 	export default {
+		props:['settings'],
 		data(){
 			return {
-				add: 'add'
+				name: this.addName() || 'add'
 			}
 		},
 		methods: {
-			onChange(e) {
-				if(this.add === 'add') {
-					this.add = 'remove';
-					this.favoriteHolder.push(e.target.parentNode.id);
+			addName() {
+				for (let key in localStorage) {
+					if ('movie ' + this.settings == key) {
+						console.log(key);
+						console.log('movie ' + this.settings);
+						return 'remove';
+					}
+				}
+			},
+			onChange() {
+				if(this.name === 'add') {
+					this.name = 'remove';
+					localStorage.setItem(('movie ' + this.settings), this.settings);
 				} else {
-					this.add = 'add';
-					this.favoriteHolder.splice(this.favoriteHolder.indexOf(e.target.parentNode.id), 1);
+					this.name = 'add';
+					localStorage.removeItem('movie ' + this.settings);
 				}
 			}
 		}

@@ -10,7 +10,9 @@
 					Second tab content
 				</tab>
 				<tab name="Third tab">
-					Third tab content
+					<app-favorite-list :items="items"
+					>
+					</app-favorite-list>
 				</tab>
 			</tabs>
 		</div>
@@ -34,10 +36,6 @@ export default {
 				throw new Error('Network response was not ok');
 			})
 			.then((json) => {
-				// this.posts.push({
-				// 	title: json.title,
-				// 	body: json.body
-				// });
 				this.items = json.data.movies;
 			})
 			.catch((error) => {
@@ -79,7 +77,8 @@ export default {
 		border-radius: 5px;
 	}
 
-	.tabs-component-tab:hover {
+	.tabs-component-tab:hover,
+	.tabs-component-tab.is-active {
 		background-color: #ddd;
 	}
 

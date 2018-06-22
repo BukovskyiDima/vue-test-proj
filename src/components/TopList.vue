@@ -1,20 +1,21 @@
 <template>
 	<ul class="movies-holder"
 	>
-		{{  favoriteHolder  }}
-		<li v-for="item in items"
+		<li class="moive" 
+			v-for="item in items"
 			:id="item.ranking"
 			:key="item.ranking"
 		>
-			<div class="content-holder"
-			>
+			<div class="content-holder">
 				<h3>{{ item.title }}</h3>
 				<p>{{ item.plot }}</p>
-				<span>{{ item.rating }}</span>
+				<span>rating: {{ item.rating }}</span>
 			</div>
-			<app-button-list
+			<app-button-list :settings="item.ranking"
+							 @addList="addList"
 			>
 			</app-button-list>
+			<hr>
 		</li>
 	</ul>
 </template>
@@ -24,10 +25,18 @@
 		props: ['items'],
 		data() {
 			return {
-				favoriteHolder: []
+				count: 0,
+				favoriteList: []
 			}
 		},
 		methods: {
+			addList(item) {
+				if(!(this.favoriteList.indexOf(item)) + 1) {
+					this.favoriteList.push(item)
+				}
+
+				return favoriteList;
+			}
 		}
 	}
 </script>
@@ -37,5 +46,13 @@
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
+	}
+
+	.movie {
+		margin-bottom: 20px !important;
+	}
+
+	.content-holder {
+		margin-bottom: 15px;
 	}
 </style>
