@@ -1,5 +1,4 @@
 <template>
-
 	<ul class="movies-holder"
 	>
 		{{  favoriteHolder  }}
@@ -13,14 +12,11 @@
 				<p>{{ item.plot }}</p>
 				<span>{{ item.rating }}</span>
 			</div>
-			<button @click="addMovie"
+			<app-button-list
 			>
-				{{ add }}
-			</button>
+			</app-button-list>
 		</li>
 	</ul>
-
-
 </template>
 
 <script>
@@ -28,20 +24,10 @@
 		props: ['items'],
 		data() {
 			return {
-				favoriteHolder: [],
-				add: 'add'
+				favoriteHolder: []
 			}
 		},
 		methods: {
-			addMovie(e) {
-				if(this.add === 'add') {
-					this.add = 'remove';
-					this.favoriteHolder.push(e.target.parentNode.id);
-				} else {
-					this.add = 'add';
-					this.favoriteHolder.splice(this.favoriteHolder.indexOf(e.target.parentNode.id), 1);
-				}
-			}
 		}
 	}
 </script>
